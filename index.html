@@ -3,746 +3,725 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HÖRMANNSHOFER FASSADEN® – Ihr Fassadenspezialist seit über 60 Jahren. VHF und WDVS Systeme aus Meisterhand. 4 Standorte deutschlandweit.">
-    <meta name="keywords" content="Fassaden, Dämmung, WDVS, VHF, Wärmedämmverbundsystem, Fassadensanierung, Hörmannshofer">
-    <title>HÖRMANNSHOFER FASSADEN® – Ihr Fassadenspezialist seit über 60 Jahren</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>HÖRMANNSHOFER FASSADEN® – Editorial Magazine</title>
     <link rel="stylesheet" href="themes.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body, 'Lora', Georgia, serif);
+            color: var(--color-text, #222);
+            background: var(--color-bg, #F8F6F1);
+            line-height: 1.7;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ============ MAGAZINE NAVBAR ============ */
+        .mag-header {
+            border-bottom: 1px solid var(--color-border, #ddd);
+            background: var(--color-bg, #F8F6F1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .mag-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 60px;
+        }
+        .mag-nav {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-text-muted, #999);
+        }
+        .mag-nav a { transition: color 0.2s; }
+        .mag-nav a:hover { color: var(--color-accent); }
+        .mag-logo-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .mag-logo-center img {
+            height: 32px;
+        }
+        .mag-cta {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .mag-cta:hover { background: var(--color-accent); color: #fff; }
+
+        /* ============ EDITORIAL HERO ============ */
+        .ed-hero {
+            padding: 80px 60px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .ed-hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 50px;
+            align-items: end;
+        }
+        .ed-hero-text h1 {
+            font-family: var(--font-heading, 'Playfair Display', serif);
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 700;
+            line-height: 1.02;
+            color: var(--color-primary, #2B3A4A);
+            margin-bottom: 30px;
+            letter-spacing: -0.03em;
+        }
+        .ed-hero-text h1 em {
+            font-style: italic;
+            color: var(--color-accent);
+            display: block;
+        }
+        .ed-hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.82rem;
+            color: var(--color-text-muted, #999);
+            border-top: 1px solid var(--color-border, #ddd);
+            padding-top: 20px;
+        }
+        .ed-hero-meta .award {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ed-hero-meta .award img { height: 28px; }
+        .ed-hero-img {
+            border-radius: 4px;
+            overflow: hidden;
+            height: 500px;
+        }
+        .ed-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ============ CONTENT AREA ============ */
+        .ed-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* ============ LEAD PARAGRAPH ============ */
+        .ed-lead {
+            max-width: 800px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        .ed-lead p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+        .ed-lead p::first-letter {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            float: left;
+            line-height: 1;
+            margin-right: 10px;
+            margin-top: 4px;
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        /* ============ DIVIDER ============ */
+        .ed-divider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        .ed-divider::before, .ed-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-border, #ddd);
+        }
+        .ed-divider span {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        /* ============ FULL BLEED IMAGE ============ */
+        .full-bleed {
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            position: relative;
+            margin: 40px 0;
+        }
+        .full-bleed img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .full-bleed-caption {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 8px 16px;
+            font-size: 0.72rem;
+            font-style: italic;
+            border-radius: 4px;
+        }
+
+        /* ============ TWO COLUMN ARTICLE ============ */
+        .ed-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 60px 0;
+        }
+        .ed-two-col h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: var(--color-primary);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            grid-column: 1 / -1;
+        }
+        .ed-two-col h2 em { color: var(--color-accent); font-style: italic; }
+        .ed-col p {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: var(--color-text-light, #555);
+            margin-bottom: 16px;
+        }
+
+        /* ============ PULL QUOTE ============ */
+        .pull-quote {
+            padding: 40px 0;
+            margin: 20px 0;
+            border-top: 3px solid var(--color-accent);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .pull-quote blockquote {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--color-primary);
+            line-height: 1.4;
+            max-width: 700px;
+        }
+        .pull-quote cite {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--color-accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ============ STATS EDITORIAL ============ */
+        .ed-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            margin: 40px 0;
+        }
+        .ed-stat {
+            text-align: center;
+            padding: 40px 20px;
+            border-right: 1px solid var(--color-border);
+        }
+        .ed-stat:last-child { border-right: none; }
+        .ed-stat .num {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+        .ed-stat .suf { font-size: 1.2rem; color: var(--color-accent); }
+        .ed-stat .lbl {
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-top: 8px;
+            color: var(--color-primary);
+        }
+        .ed-stat .det {
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+
+        /* ============ SERVICE FEATURE ============ */
+        .ed-feature {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 50px;
+            padding: 60px 0;
+            align-items: center;
+        }
+        .ed-feature.reverse { direction: rtl; }
+        .ed-feature.reverse > * { direction: ltr; }
+        .ed-feat-img {
+            border-radius: 4px;
+            overflow: hidden;
+            height: 420px;
+        }
+        .ed-feat-img img { width: 100%; height: 100%; object-fit: cover; }
+        .ed-feat-text h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+        .ed-feat-text .sub {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .ed-feat-text p {
+            font-size: 0.92rem;
+            color: var(--color-text-light);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .ed-feat-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ed-feat-list li {
+            padding: 5px 0;
+            font-size: 0.85rem;
+            color: var(--color-text);
+            padding-left: 20px;
+            position: relative;
+        }
+        .ed-feat-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+        .mat-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+        .mat-list span {
+            padding: 4px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 3px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--color-text-light);
+        }
+
+        /* ============ REFERENCE GRID ============ */
+        .ed-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 280px 280px;
+            gap: 4px;
+            margin: 40px 0;
+        }
+        .ed-ref-grid .ri { overflow: hidden; position: relative; }
+        .ed-ref-grid .ri:first-child { grid-column: 1 / 3; grid-row: 1 / 3; }
+        .ed-ref-grid .ri img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .ed-ref-grid .ri:hover img { transform: scale(1.04); }
+        .ed-ref-grid .ri .rl {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ============ LOCATIONS EDITORIAL ============ */
+        .ed-loc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding: 40px 0;
+        }
+        .ed-loc {
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .ed-loc:hover { border-color: var(--color-accent); }
+        .ed-loc-img { height: 160px; overflow: hidden; }
+        .ed-loc-img img { width: 100%; height: 100%; object-fit: cover; }
+        .ed-loc-body {
+            padding: 18px;
+        }
+        .ed-loc-body h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+        .ed-loc-body .reg {
+            font-size: 0.72rem;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .ed-loc-body address {
+            font-style: normal;
+            font-size: 0.78rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        /* ============ CONTACT EDITORIAL ============ */
+        .ed-contact {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            padding: 60px 0;
+            align-items: start;
+        }
+        .ed-contact-left h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .ed-contact-left h2 em { color: var(--color-accent); font-style: italic; }
+        .ed-contact-left > p {
+            color: var(--color-text-light);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .ecd {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .ecd svg { width: 20px; height: 20px; color: var(--color-accent); flex-shrink: 0; }
+        .ecd strong { display: block; font-size: 0.78rem; color: var(--color-primary); }
+        .ecd a, .ecd span { font-size: 0.85rem; color: var(--color-text-light); }
+        .ed-form {
+            border: 1px solid var(--color-border);
+            padding: 36px;
+            border-radius: 4px;
+        }
+        .ed-form .fr { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .ed-form .fg { margin-bottom: 14px; }
+        .ed-form label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-primary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .ed-form input, .ed-form select, .ed-form textarea {
+            width: 100%; padding: 11px 14px; border: 1px solid var(--color-border);
+            border-radius: 2px; font-family: inherit; font-size: 0.88rem;
+            background: var(--color-bg); color: var(--color-text); transition: border-color 0.3s;
+        }
+        .ed-form input:focus, .ed-form select:focus, .ed-form textarea:focus { outline: none; border-color: var(--color-accent); }
+        .ed-form .btn-send {
+            display: inline-flex; align-items: center; gap: 8px; padding: 13px 36px;
+            background: var(--color-primary); color: #fff; border: none; border-radius: 2px;
+            font-family: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            transition: all 0.3s; width: 100%; justify-content: center;
+        }
+        .ed-form .btn-send:hover { background: var(--color-accent); }
+
+        /* ============ FOOTER ============ */
+        .ed-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 30px 60px;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+        }
+        .ed-footer a { color: var(--color-accent); }
+
+        /* ============ REVEAL ============ */
+        .reveal { opacity: 0; transform: translateY(25px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .ed-hero-grid { grid-template-columns: 1fr; }
+            .ed-hero-img { height: 350px; }
+            .ed-feature, .ed-feature.reverse { grid-template-columns: 1fr; direction: ltr; }
+            .ed-ref-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .ed-ref-grid .ri:first-child { grid-column: 1 / -1; height: 350px; }
+            .ed-ref-grid .ri { height: 240px; }
+            .ed-loc-grid { grid-template-columns: repeat(2, 1fr); }
+            .ed-contact { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .mag-header-top { padding: 12px 20px; }
+            .mag-nav { display: none; }
+            .mag-logo-center { position: static; transform: none; }
+            .ed-hero { padding: 40px 20px; }
+            .ed-content { padding: 0 20px; }
+            .ed-divider { padding-left: 20px; padding-right: 20px; }
+            .ed-two-col { grid-template-columns: 1fr; gap: 0; }
+            .ed-stats { grid-template-columns: repeat(2, 1fr); }
+            .ed-loc-grid { grid-template-columns: 1fr; }
+            .ed-footer { padding: 20px; }
+            .full-bleed { height: 35vh; }
+        }
+    </style>
 </head>
-<body data-theme="classic">
-    <!-- ========== THEME SWITCHER ========== -->
+<body data-theme="minimal">
+    <!-- THEME SWITCHER -->
     <div class="theme-switcher" id="themeSwitcher">
-        <button class="theme-switcher-toggle" id="themeSwitcherToggle" aria-label="Design wechseln">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-            <span>Design</span>
-        </button>
+        <button class="theme-switcher-toggle" id="themeSwitcherToggle" aria-label="Design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
         <div class="theme-switcher-panel" id="themeSwitcherPanel">
-            <div class="theme-panel-header">
-                <span>Design & Layout</span>
-                <button class="theme-panel-close" id="themePanelClose">&times;</button>
-            </div>
+            <div class="theme-panel-header"><span>Design & Layout</span><button class="theme-panel-close" id="themePanelClose">&times;</button></div>
             <div class="theme-options">
-                <button class="theme-option active" data-theme="classic">
-                    <div class="theme-preview">
-                        <div class="theme-preview-bar" style="background: #2B3A4A"></div>
-                        <div class="theme-preview-accent" style="background: #C67B3C"></div>
-                        <div class="theme-preview-bg" style="background: #F5F2ED"></div>
-                    </div>
-                    <span class="theme-name">Classic Warm</span>
-                    <span class="theme-desc">Elegant & traditionell</span>
-                </button>
-                <button class="theme-option" data-theme="minimal">
-                    <div class="theme-preview">
-                        <div class="theme-preview-bar" style="background: #111111"></div>
-                        <div class="theme-preview-accent" style="background: #FF6B35"></div>
-                        <div class="theme-preview-bg" style="background: #FAFAFA"></div>
-                    </div>
-                    <span class="theme-name">Modern Minimal</span>
-                    <span class="theme-desc">Puristisch & clean</span>
-                </button>
-                <button class="theme-option" data-theme="dark">
-                    <div class="theme-preview">
-                        <div class="theme-preview-bar" style="background: #0D0D0D"></div>
-                        <div class="theme-preview-accent" style="background: #F0A500"></div>
-                        <div class="theme-preview-bg" style="background: #1A1A2E"></div>
-                    </div>
-                    <span class="theme-name">Industrial Dark</span>
-                    <span class="theme-desc">Dunkel & kraftvoll</span>
-                </button>
-                <button class="theme-option" data-theme="nature">
-                    <div class="theme-preview">
-                        <div class="theme-preview-bar" style="background: #2D4A3E"></div>
-                        <div class="theme-preview-accent" style="background: #8DB580"></div>
-                        <div class="theme-preview-bg" style="background: #F0EDE5"></div>
-                    </div>
-                    <span class="theme-name">Nature Eco</span>
-                    <span class="theme-desc">Natürlich & nachhaltig</span>
-                </button>
-                <button class="theme-option" data-theme="blueprint">
-                    <div class="theme-preview">
-                        <div class="theme-preview-bar" style="background: #0A1628"></div>
-                        <div class="theme-preview-accent" style="background: #00B4D8"></div>
-                        <div class="theme-preview-bg" style="background: #F0F4F8"></div>
-                    </div>
-                    <span class="theme-name">Blueprint</span>
-                    <span class="theme-desc">Technisch & präzise</span>
-                </button>
+                <button class="theme-option" data-theme="classic"><div class="theme-preview"><div class="theme-preview-bar" style="background:#2B3A4A"></div><div class="theme-preview-accent" style="background:#C67B3C"></div><div class="theme-preview-bg" style="background:#F5F2ED"></div></div><span class="theme-name">Classic Warm</span><span class="theme-desc">Elegant</span></button>
+                <button class="theme-option active" data-theme="minimal"><div class="theme-preview"><div class="theme-preview-bar" style="background:#111"></div><div class="theme-preview-accent" style="background:#FF6B35"></div><div class="theme-preview-bg" style="background:#FAFAFA"></div></div><span class="theme-name">Modern Minimal</span><span class="theme-desc">Puristisch</span></button>
+                <button class="theme-option" data-theme="dark"><div class="theme-preview"><div class="theme-preview-bar" style="background:#0D0D0D"></div><div class="theme-preview-accent" style="background:#F0A500"></div><div class="theme-preview-bg" style="background:#1A1A2E"></div></div><span class="theme-name">Industrial Dark</span><span class="theme-desc">Dunkel</span></button>
+                <button class="theme-option" data-theme="nature"><div class="theme-preview"><div class="theme-preview-bar" style="background:#2D4A3E"></div><div class="theme-preview-accent" style="background:#8DB580"></div><div class="theme-preview-bg" style="background:#F0EDE5"></div></div><span class="theme-name">Nature Eco</span><span class="theme-desc">Natürlich</span></button>
+                <button class="theme-option" data-theme="blueprint"><div class="theme-preview"><div class="theme-preview-bar" style="background:#0A1628"></div><div class="theme-preview-accent" style="background:#00B4D8"></div><div class="theme-preview-bg" style="background:#F0F4F8"></div></div><span class="theme-name">Blueprint</span><span class="theme-desc">Technisch</span></button>
             </div>
             <div class="variant-section-divider"><span>Layout</span></div>
             <div class="variant-options">
-                <a href="index.html" class="variant-option active"><div class="variant-option-num">1</div><div class="variant-option-info"><span class="variant-option-name">Classic Corporate</span><span class="variant-option-desc">Klassisches Top-Navbar Layout</span></div></a>
+                <a href="variante1.html" class="variant-option"><div class="variant-option-num">1</div><div class="variant-option-info"><span class="variant-option-name">Classic Corporate</span><span class="variant-option-desc">Klassisches Top-Navbar Layout</span></div></a>
                 <a href="variante2.html" class="variant-option"><div class="variant-option-num">2</div><div class="variant-option-info"><span class="variant-option-name">Fullscreen Cinematic</span><span class="variant-option-desc">Scroll-Snap Vollbild-Sektionen</span></div></a>
                 <a href="variante3.html" class="variant-option"><div class="variant-option-num">3</div><div class="variant-option-info"><span class="variant-option-name">Split Navigation</span><span class="variant-option-desc">Vertikale Sidebar-Navigation</span></div></a>
-                <a href="variante4.html" class="variant-option"><div class="variant-option-num">4</div><div class="variant-option-info"><span class="variant-option-name">Editorial Magazine</span><span class="variant-option-desc">Magazin-Stil mit Typografie</span></div></a>
+                <a href="index.html" class="variant-option active"><div class="variant-option-num">4</div><div class="variant-option-info"><span class="variant-option-name">Editorial Magazine</span><span class="variant-option-desc">Magazin-Stil mit Typografie</span></div></a>
                 <a href="variante5.html" class="variant-option"><div class="variant-option-num">5</div><div class="variant-option-info"><span class="variant-option-name">Bento Dashboard</span><span class="variant-option-desc">Kompaktes Karten-Layout</span></div></a>
             </div>
         </div>
     </div>
 
-    <!-- ========== NAVIGATION ========== -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#hero" class="nav-logo">
-                <img src="https://www.hoermannshofer.de/images/hoermannshofer-logo.png" alt="HÖRMANNSHOFER FASSADEN®" class="nav-logo-img">
-            </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#hero" class="nav-link">Start</a></li>
-                <li><a href="#ueber-uns" class="nav-link">Über uns</a></li>
-                <li><a href="#leistungen" class="nav-link">Leistungen</a></li>
-                <li><a href="#kennzahlen" class="nav-link">Kompetenz</a></li>
-                <li><a href="#referenzen" class="nav-link">Referenzen</a></li>
-                <li><a href="#standorte" class="nav-link">Standorte</a></li>
-                <li><a href="#kontakt" class="nav-link nav-link--cta">Kontakt</a></li>
+    <!-- ========== MAGAZINE HEADER ========== -->
+    <header class="mag-header">
+        <div class="mag-header-top">
+            <ul class="mag-nav">
+                <li><a href="#leistungen">Leistungen</a></li>
+                <li><a href="#referenzen">Referenzen</a></li>
+                <li><a href="#standorte">Standorte</a></li>
             </ul>
+            <a href="#" class="mag-logo-center">
+                <img src="https://www.hoermannshofer.de/images/hoermannshofer-logo.png" alt="HÖRMANNSHOFER">
+            </a>
+            <a href="#kontakt" class="mag-cta">Kontakt</a>
         </div>
-    </nav>
+    </header>
 
-    <!-- ========== HERO ========== -->
-    <section class="hero" id="hero">
-        <div class="hero-bg">
-            <div class="hero-slider">
-                <div class="hero-slide active" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/header.jpg')"></div>
-                <div class="hero-slide" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/header2.jpg')"></div>
-                <div class="hero-slide" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/header3.jpg')"></div>
-                <div class="hero-slide" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/header4.jpg')"></div>
-            </div>
-            <div class="hero-overlay"></div>
-            <div class="hero-pattern"></div>
-        </div>
-        <div class="container hero-content">
-            <div class="hero-badge animate-in">
-                <img src="https://www.hoermannshofer.de/images/Plus-x-award-2025.png" alt="Plus X Award 2025" class="badge-award-img">
-                <span>Plus X Award 2024 & 2025</span>
-            </div>
-            <h1 class="hero-title animate-in">
-                <span class="hero-title-line">Solides Handwerk</span>
-                <span class="hero-title-line hero-title-accent">trifft Tradition</span>
-                <span class="hero-title-line">& Innovation</span>
-            </h1>
-            <p class="hero-subtitle animate-in">
-                Ihr Fassadenspezialist seit über 60 Jahren – Wärmedämmung und individuelle 
-                Gestaltungsmöglichkeiten mit hochwertigen Fassadensystemen.
-            </p>
-            <div class="hero-actions animate-in">
-                <a href="#leistungen" class="btn btn-primary">Unsere Leistungen</a>
-                <a href="#kontakt" class="btn btn-outline">Beratung anfordern</a>
-            </div>
-            <div class="hero-scroll-indicator">
-                <span>Mehr erfahren</span>
-                <div class="scroll-arrow"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== ÜBER UNS ========== -->
-    <section class="section section-about" id="ueber-uns">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Über uns</span>
-                <h2 class="section-title">Familienunternehmen <br><em>mit Leidenschaft</em></h2>
-            </div>
-            <div class="about-grid">
-                <div class="about-text animate-on-scroll">
-                    <p class="about-lead">
-                        Sie suchen einen zuverlässigen und kompetenten Partner für die Gestaltung und 
-                        Sanierung Ihrer Fassade? Dann sprechen Sie mit uns.
-                    </p>
-                    <p>
-                        Wir sind ein mittelständisches Familienunternehmen und führen unser Handwerk 
-                        seit über 60 Jahren gewissenhaft, termingerecht und in hoher Qualität aus. 
-                        Wir unterstützen Sie ab der Planung Ihres Bauvorhabens, vom privaten 
-                        Einfamilienhaus bis zur Großbaustelle.
-                    </p>
-                    <p>
-                        Seit 1964 steht unser Unternehmen für Kompetenz und solide Handwerksleistung. 
-                        Als Pionier der ersten Stunde sind wir an der Einführung und Weiterentwicklung 
-                        von innovativen Fassadensystemen engagiert beteiligt.
-                    </p>
-                    <div class="about-values">
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong>Technischer Fortschritt</strong>
-                                <p>Innovative Systeme für höchste Ansprüche</p>
-                            </div>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong>Für die Umwelt</strong>
-                                <p>Nachhaltig und ökologisch verantwortungsvoll</p>
-                            </div>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong>Erfolg durch Kompetenz</strong>
-                                <p>Qualifizierter Partner für Bauherren & Architekten</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual animate-on-scroll">
-                    <div class="about-image-stack">
-                        <div class="about-img about-img-1">
-                            <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/bild-1.jpg" alt="Hörmannshofer Fassadenarbeit" loading="lazy">
-                        </div>
-                        <div class="about-img about-img-2">
-                            <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/header2.jpg" alt="Hörmannshofer Qualitätshandwerk" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="about-experience">
-                        <span class="exp-number">60+</span>
-                        <span class="exp-text">Jahre Erfahrung</span>
-                    </div>
+    <!-- ========== EDITORIAL HERO ========== -->
+    <div class="ed-hero reveal">
+        <div class="ed-hero-grid">
+            <div class="ed-hero-text">
+                <h1>Solides<br>Handwerk<br><em>trifft Tradition</em></h1>
+                <div class="ed-hero-meta">
+                    <span>Fassadenspezialist seit 1964</span>
+                    <span>·</span>
+                    <span>4 Standorte</span>
+                    <span>·</span>
+                    <div class="award"><img src="https://www.hoermannshofer.de/images/Plus-x-award-2025.png" alt="Award"><span>Plus X Award 2024 & 2025</span></div>
                 </div>
             </div>
+            <div class="ed-hero-img">
+                <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/header.jpg" alt="Fassade">
+            </div>
         </div>
-    </section>
+    </div>
+
+    <!-- ========== LEAD ========== -->
+    <div class="ed-lead reveal">
+        <p>Sie suchen einen zuverlässigen und kompetenten Partner für die Gestaltung und Sanierung Ihrer Fassade? Wir sind ein mittelständisches Familienunternehmen und führen unser Handwerk seit über 60 Jahren gewissenhaft, termingerecht und in hoher Qualität aus.</p>
+    </div>
+
+    <div class="ed-divider"><span>Über uns</span></div>
+
+    <!-- ========== FULL BLEED ========== -->
+    <div class="full-bleed reveal">
+        <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/bild-1.jpg" alt="Hörmannshofer Fassadenarbeit">
+        <span class="full-bleed-caption">Qualitätshandwerk seit 1964</span>
+    </div>
+
+    <!-- ========== ZWEI-SPALTEN-ARTIKEL ========== -->
+    <div class="ed-content">
+        <div class="ed-two-col reveal">
+            <h2>Familienunternehmen <em>mit Leidenschaft</em></h2>
+            <div class="ed-col">
+                <p>Wir unterstützen Sie ab der Planung Ihres Bauvorhabens, vom privaten Einfamilienhaus bis zur Großbaustelle. Technische, gestalterische und wirtschaftliche Ansprüche bestimmen maßgeblich die Anforderungen an die Fassade.</p>
+                <p>Seit 1964 steht unser Unternehmen für Kompetenz und solide Handwerksleistung. Als Pionier der ersten Stunde sind wir an der Einführung und Weiterentwicklung von innovativen Fassadensystemen engagiert beteiligt.</p>
+            </div>
+            <div class="ed-col">
+                <p>HÖRMANNSHOFER FASSADEN® als kompetenter und leistungsstarker Partner bietet Ihnen qualitativ hochwertige Lösungen auf dem Gebiet der Fassadendämmung und Fassadenbekleidung.</p>
+                <p>Die Langlebigkeit und Werthaltigkeit einer Fassade ist abhängig von fachgerechter Planung, sorgfältiger Umsetzung und der Auswahl eines Fassadensystems bestmöglicher Qualität.</p>
+            </div>
+        </div>
+
+        <!-- PULL QUOTE -->
+        <div class="pull-quote reveal">
+            <blockquote>„Kompetente Unterstützung durch unsere Fachberater und Bauleiter ist die Basis einer gelungenen Ausführung."</blockquote>
+            <cite>HÖRMANNSHOFER FASSADEN®</cite>
+        </div>
+
+        <!-- STATS -->
+        <div class="ed-stats reveal">
+            <div class="ed-stat"><span class="num" data-target="60">0</span><span class="suf">+</span><div class="lbl">Jahre Erfahrung</div><div class="det">Seit 1964</div></div>
+            <div class="ed-stat"><span class="num" data-target="400">0</span><span class="suf">~</span><div class="lbl">Mitarbeiter</div><div class="det">Fachpersonal</div></div>
+            <div class="ed-stat"><span class="num" data-target="35000">0</span><span class="suf">+</span><div class="lbl">Fassaden</div><div class="det">Gebaut</div></div>
+            <div class="ed-stat"><span class="num" data-target="4">0</span><span class="suf"></span><div class="lbl">Standorte</div><div class="det">Deutschlandweit</div></div>
+        </div>
+    </div>
+
+    <div class="ed-divider"><span>Leistungen</span></div>
 
     <!-- ========== LEISTUNGEN ========== -->
-    <section class="section section-services" id="leistungen">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Leistungen</span>
-                <h2 class="section-title">Wärmedämmung & individuelle <br><em>Gestaltungsmöglichkeiten</em></h2>
-                <p class="section-subtitle">
-                    Technische, gestalterische und wirtschaftliche Ansprüche bestimmen maßgeblich 
-                    die Anforderungen an die Fassade. Unser besonderes Augenmerk gilt dabei immer 
-                    auch den ökologischen Aspekten.
-                </p>
-            </div>
-
-            <!-- Service Cards -->
-            <div class="services-grid">
-                <!-- VHF -->
-                <div class="service-card animate-on-scroll">
-                    <div class="service-card-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/vhf-1.jpg" alt="VHF Fassadensystem" loading="lazy">
-                    </div>
-                    <div class="service-card-header">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="8" y="12" width="48" height="40" rx="2"/>
-                                <line x1="8" y1="22" x2="56" y2="22"/>
-                                <line x1="8" y1="32" x2="56" y2="32"/>
-                                <line x1="8" y1="42" x2="56" y2="42"/>
-                                <line x1="20" y1="12" x2="20" y2="52"/>
-                                <line x1="32" y1="12" x2="32" y2="52"/>
-                                <line x1="44" y1="12" x2="44" y2="52"/>
-                            </svg>
-                        </div>
-                        <span class="service-since">seit 1964</span>
-                    </div>
-                    <h3 class="service-title">VHF</h3>
-                    <p class="service-full-name">Vorgehängte hinterlüftete Fassaden</p>
-                    <p class="service-desc">
-                        Vorgehängte hinterlüftete Fassadensysteme haben eine hohe Lebensdauer und 
-                        erweisen sich aufgrund des geringen Wartungsaufwands und ihrer funktionalen 
-                        Sicherheit als eine wirtschaftliche und nachhaltige Lösung.
-                    </p>
-                    <ul class="service-benefits">
-                        <li>Große Gestaltungsvielfalt durch unterschiedlichste Materialien</li>
-                        <li>Hohe Energieeinsparung</li>
-                        <li>Optimaler Schutz der Bausubstanz</li>
-                        <li>Bauphysikalisch bewährt und langlebig</li>
-                    </ul>
-                    <div class="service-materials">
-                        <span>Faserzement</span>
-                        <span>Aluminium</span>
-                        <span>Edelstahl</span>
-                        <span>Naturstein</span>
-                        <span>Keramik</span>
-                        <span>Glas</span>
-                    </div>
-                </div>
-
-                <!-- WDVS -->
-                <div class="service-card animate-on-scroll">
-                    <div class="service-card-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/wdvs-1.jpg" alt="WDVS Wärmedämmverbundsystem" loading="lazy">
-                    </div>
-                    <div class="service-card-header">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="12" y="8" width="40" height="48" rx="2"/>
-                                <rect x="18" y="14" width="12" height="10" rx="1"/>
-                                <rect x="34" y="14" width="12" height="10" rx="1"/>
-                                <rect x="18" y="28" width="12" height="10" rx="1"/>
-                                <rect x="34" y="28" width="12" height="10" rx="1"/>
-                                <rect x="26" y="42" width="12" height="14" rx="1"/>
-                                <path d="M6 8h4v48H6z" opacity="0.5"/>
-                                <path d="M54 8h4v48h-4z" opacity="0.5"/>
-                            </svg>
-                        </div>
-                        <span class="service-since">seit 1975</span>
-                    </div>
-                    <h3 class="service-title">WDVS</h3>
-                    <p class="service-full-name">Wärmedämmverbundsysteme</p>
-                    <p class="service-desc">
-                        Wärmedämmverbundsysteme haben sich sowohl bei der energetischen Sanierung, 
-                        bei der Modernisierung als auch bei besonderen architektonischen Anforderungen 
-                        an die Gestaltung von Fassaden bestens bewährt.
-                    </p>
-                    <ul class="service-benefits">
-                        <li>Anspruchsvolle Optik einer fugenlosen Putzfassade</li>
-                        <li>CO₂-Emissionen werden nachhaltig gesenkt</li>
-                        <li>Nachhaltige Verbesserung des Wohnklimas</li>
-                        <li>Bewährt an ca. 800 Mio. m² Fassadenfläche</li>
-                    </ul>
-                    <div class="service-materials">
-                        <span>Mineralfaser</span>
-                        <span>EPS Polystyrol</span>
-                        <span>Holzweichfaser</span>
-                        <span>Hanf</span>
-                        <span>Kork</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Services -->
-            <div class="services-additional animate-on-scroll">
-                <h3>Weitere Leistungen</h3>
-                <div class="additional-grid">
-                    <div class="additional-item">
-                        <div class="additional-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                            </svg>
-                        </div>
-                        <span>Putzfassaden</span>
-                    </div>
-                    <div class="additional-item">
-                        <div class="additional-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                            </svg>
-                        </div>
-                        <span>Fassadenanstriche</span>
-                    </div>
-                    <div class="additional-item">
-                        <div class="additional-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M11.42 15.17l-5.66-5.66a8 8 0 1111.31 0l-5.65 5.66zM12 9v.01M12 12v.01"/>
-                            </svg>
-                        </div>
-                        <span>Betonsanierung</span>
-                    </div>
-                    <div class="additional-item">
-                        <div class="additional-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                            </svg>
-                        </div>
-                        <span>Asbestentsorgung</span>
-                    </div>
-                    <div class="additional-item">
-                        <div class="additional-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z"/>
-                                <path d="M16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
-                            </svg>
-                        </div>
-                        <span>Gerüstbau</span>
-                    </div>
-                </div>
+    <div class="ed-content" id="leistungen">
+        <div class="ed-feature reveal">
+            <div class="ed-feat-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/vhf-1.jpg" alt="VHF" loading="lazy"></div>
+            <div class="ed-feat-text">
+                <h3>VHF</h3>
+                <div class="sub">Vorgehängte hinterlüftete Fassaden · seit 1964</div>
+                <p>Vorgehängte hinterlüftete Fassadensysteme haben eine hohe Lebensdauer und erweisen sich aufgrund des geringen Wartungsaufwands als wirtschaftliche Lösung.</p>
+                <ul class="ed-feat-list">
+                    <li>Große Gestaltungsvielfalt durch unterschiedlichste Materialien</li>
+                    <li>Hohe Energieeinsparung</li>
+                    <li>Optimaler Schutz der Bausubstanz</li>
+                    <li>Bauphysikalisch bewährt und langlebig</li>
+                </ul>
+                <div class="mat-list"><span>Faserzement</span><span>Aluminium</span><span>Edelstahl</span><span>Naturstein</span><span>Keramik</span><span>Glas</span></div>
             </div>
         </div>
-    </section>
 
-    <!-- ========== BERATUNG BANNER ========== -->
-    <section class="section section-cta">
-        <div class="cta-bg">
-            <div class="cta-bg-image" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/header4.jpg')"></div>
-            <div class="cta-pattern"></div>
-        </div>
-        <div class="container">
-            <div class="cta-content animate-on-scroll">
-                <h2>Ausführliche Beratung</h2>
-                <p>
-                    Kompetente Unterstützung durch unsere Fachberater und Bauleiter ist die Basis 
-                    einer gelungenen Ausführung. Von der Bestandsaufnahme über die Werkplanung 
-                    bis zur Gestaltungsplanung.
-                </p>
-                <a href="#kontakt" class="btn btn-primary btn-light">Fachberatung anfordern</a>
+        <div class="ed-feature reverse reveal">
+            <div class="ed-feat-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/wdvs-1.jpg" alt="WDVS" loading="lazy"></div>
+            <div class="ed-feat-text">
+                <h3>WDVS</h3>
+                <div class="sub">Wärmedämmverbundsysteme · seit 1975</div>
+                <p>Wärmedämmverbundsysteme haben sich sowohl bei der energetischen Sanierung als auch bei besonderen architektonischen Anforderungen an die Fassadengestaltung bestens bewährt.</p>
+                <ul class="ed-feat-list">
+                    <li>Anspruchsvolle Optik einer fugenlosen Putzfassade</li>
+                    <li>CO₂-Emissionen werden nachhaltig gesenkt</li>
+                    <li>Nachhaltige Verbesserung des Wohnklimas</li>
+                    <li>Bewährt an ca. 800 Mio. m² Fassadenfläche</li>
+                </ul>
+                <div class="mat-list"><span>Mineralfaser</span><span>EPS Polystyrol</span><span>Holzweichfaser</span><span>Hanf</span><span>Kork</span></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- ========== KENNZAHLEN ========== -->
-    <section class="section section-stats" id="kennzahlen">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Kompetenz in Zahlen</span>
-                <h2 class="section-title">Erfolg durch Kompetenz <br><em>und Erfahrung</em></h2>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card animate-on-scroll">
-                    <div class="stat-number" data-target="60">0</div>
-                    <div class="stat-suffix">+</div>
-                    <div class="stat-label">Jahre Erfahrung</div>
-                    <div class="stat-detail">Seit 1964 Ihr Partner</div>
-                </div>
-                <div class="stat-card animate-on-scroll">
-                    <div class="stat-number" data-target="400">0</div>
-                    <div class="stat-suffix">~</div>
-                    <div class="stat-label">Mitarbeiter</div>
-                    <div class="stat-detail">Qualifiziertes Fachpersonal</div>
-                </div>
-                <div class="stat-card animate-on-scroll">
-                    <div class="stat-number" data-target="35000">0</div>
-                    <div class="stat-suffix">+</div>
-                    <div class="stat-label">Fassaden gebaut</div>
-                    <div class="stat-detail">Zur vollsten Zufriedenheit</div>
-                </div>
-                <div class="stat-card animate-on-scroll">
-                    <div class="stat-number" data-target="4">0</div>
-                    <div class="stat-suffix"></div>
-                    <div class="stat-label">Standorte</div>
-                    <div class="stat-detail">Deutschlandweit im Einsatz</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== QUALITÄT ========== -->
-    <section class="section section-quality">
-        <div class="container">
-            <div class="quality-grid">
-                <div class="quality-content animate-on-scroll">
-                    <span class="section-tag">Qualitätsversprechen</span>
-                    <h2 class="section-title">Solide Handwerksqualität – <br><em>dafür steht Hörmannshofer</em></h2>
-                    <p>
-                        HÖRMANNSHOFER FASSADEN® als kompetenter und leistungsstarker Partner bietet 
-                        Ihnen qualitativ hochwertige Lösungen auf dem Gebiet der Fassadendämmung und 
-                        Fassadenbekleidung. Wir verwenden ausschließlich zertifizierte und bauaufsichtlich 
-                        zugelassene Fassadensysteme renommierter Hersteller.
-                    </p>
-                    <p>
-                        Die Langlebigkeit und Werthaltigkeit einer Fassade ist abhängig von fachgerechter 
-                        Planung, sorgfältiger Umsetzung und der Auswahl eines Fassadensystems bestmöglicher 
-                        Qualität. Wir führen unsere Arbeiten mit eigenem, gut geschultem Fachpersonal 
-                        mit Leidenschaft aus.
-                    </p>
-                    <div class="quality-badges">
-                        <div class="quality-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                            </svg>
-                            <span>Zertifizierte Systeme</span>
-                        </div>
-                        <div class="quality-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
-                            </svg>
-                            <span>Plus X Award</span>
-                        </div>
-                        <div class="quality-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>Termingerecht</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="quality-visual animate-on-scroll">
-                    <div class="quality-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-25.jpg" alt="Hörmannshofer Referenzprojekt" loading="lazy">
-                    </div>
-                    <div class="quality-partner">
-                        <p class="partner-label">Unsere Partner</p>
-                        <img src="https://www.hoermannshofer.de/images/Logo-streifen-2021.png" alt="Partner-Logos" class="partner-logos" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== STANDORTE ========== -->
-    <section class="section section-locations" id="standorte">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Standorte</span>
-                <h2 class="section-title">4 Standorte in Bayern, <br><em>Sachsen & Sachsen-Anhalt</em></h2>
-                <p class="section-subtitle">
-                    Mit unseren vier Standorten sind wir deutschlandweit für Sie im Einsatz.
-                </p>
-            </div>
-            <div class="locations-grid">
-                <div class="location-card animate-on-scroll">
-                    <div class="location-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/poettmes.jpg" alt="Standort Pöttmes" loading="lazy">
-                    </div>
-                    <div class="location-card-body">
-                    <h3>Pöttmes</h3>
-                    <p class="location-region">bei Augsburg · Bayern</p>
-                    <address>
-                        HÖRMANNSHOFER FASSADEN Süd GmbH & Co. KG<br>
-                        Immendorf 33<br>
-                        86554 Pöttmes
-                    </address>
-                    <div class="location-contact">
-                        <a href="tel:+498253999500">Tel 08253-99 95-0</a>
-                        <a href="mailto:info@hoermannshofer.de">info@hoermannshofer.de</a>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="location-card animate-on-scroll">
-                    <div class="location-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/marktoberdorf.jpg" alt="Standort Marktoberdorf" loading="lazy">
-                    </div>
-                    <div class="location-card-body">
-                    <h3>Marktoberdorf</h3>
-                    <p class="location-region">Allgäu · Bayern</p>
-                    <address>
-                        HÖRMANNSHOFER FASSADEN Süd GmbH & Co. KG<br>
-                        Schwabenstraße 114<br>
-                        87616 Marktoberdorf
-                    </address>
-                    <div class="location-contact">
-                        <a href="tel:+498342962700">Tel 08342-96 27-0</a>
-                        <a href="mailto:marktoberdorf@hoermannshofer.de">marktoberdorf@hoermannshofer.de</a>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="location-card animate-on-scroll">
-                    <div class="location-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/halle.jpg" alt="Standort Halle" loading="lazy">
-                    </div>
-                    <div class="location-card-body">
-                    <h3>Halle</h3>
-                    <p class="location-region">an der Saale · Sachsen-Anhalt</p>
-                    <address>
-                        HÖRMANNSHOFER FASSADEN GmbH & Co. Halle KG<br>
-                        Reideburger Str. 55<br>
-                        06116 Halle/Saale
-                    </address>
-                    <div class="location-contact">
-                        <a href="tel:+493455699300">Tel 0345-569 93-0</a>
-                        <a href="mailto:halle@hoermannshofer.de">halle@hoermannshofer.de</a>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="location-card animate-on-scroll">
-                    <div class="location-image">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/niederdorf.jpg" alt="Standort Niederdorf" loading="lazy">
-                    </div>
-                    <div class="location-card-body">
-                    <h3>Niederdorf</h3>
-                    <p class="location-region">Erzgebirge · Sachsen</p>
-                    <address>
-                        HÖRMANNSHOFER FASSADEN GmbH & Co. Niederdorf KG<br>
-                        Chemnitzer Str. 2b<br>
-                        09366 Niederdorf
-                    </address>
-                    <div class="location-contact">
-                        <a href="tel:+4937296701000">Tel 037296-701-0</a>
-                        <a href="mailto:niederdorf@hoermannshofer.de">niederdorf@hoermannshofer.de</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="ed-divider"><span>Referenzen</span></div>
 
     <!-- ========== REFERENZEN ========== -->
-    <section class="section section-referenzen" id="referenzen">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Referenzen</span>
-                <h2 class="section-title">Unsere Projekte <br><em>sprechen für sich</em></h2>
-                <p class="section-subtitle">
-                    Mit Stolz schauen wir auf nahezu 35.000 Fassaden, die wir für unsere Kunden 
-                    zu deren großer Zufriedenheit gebaut haben.
-                </p>
-            </div>
-            <div class="referenzen-grid animate-on-scroll">
-                <div class="ref-item ref-item--wide">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-24.jpg" alt="VHF Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>VHF Fassade</span></div>
-                </div>
-                <div class="ref-item">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-31.jpg" alt="WDVS Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>WDVS System</span></div>
-                </div>
-                <div class="ref-item">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-20.jpg" alt="VHF Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>VHF Fassade</span></div>
-                </div>
-                <div class="ref-item">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-28.jpg" alt="WDVS Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>WDVS System</span></div>
-                </div>
-                <div class="ref-item ref-item--wide">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-15.jpg" alt="VHF Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>VHF Fassade</span></div>
-                </div>
-                <div class="ref-item">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-22.jpg" alt="WDVS Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>WDVS System</span></div>
-                </div>
-                <div class="ref-item">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-10.jpg" alt="VHF Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>VHF Fassade</span></div>
-                </div>
-                <div class="ref-item">
-                    <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-15.jpg" alt="WDVS Referenz" loading="lazy">
-                    <div class="ref-overlay"><span>WDVS System</span></div>
-                </div>
-            </div>
+    <div class="ed-content" id="referenzen">
+        <div class="ed-ref-grid reveal">
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-24.jpg" alt="VHF" loading="lazy"><div class="rl">VHF Fassade</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-31.jpg" alt="WDVS" loading="lazy"><div class="rl">WDVS System</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-20.jpg" alt="VHF" loading="lazy"><div class="rl">VHF Fassade</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-28.jpg" alt="WDVS" loading="lazy"><div class="rl">WDVS System</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-15.jpg" alt="VHF" loading="lazy"><div class="rl">VHF Fassade</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-22.jpg" alt="WDVS" loading="lazy"><div class="rl">WDVS System</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-10.jpg" alt="VHF" loading="lazy"><div class="rl">VHF Fassade</div></div>
+            <div class="ri"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-15.jpg" alt="WDVS" loading="lazy"><div class="rl">WDVS System</div></div>
         </div>
-    </section>
+    </div>
+
+    <div class="ed-divider"><span>Standorte</span></div>
+
+    <!-- ========== STANDORTE ========== -->
+    <div class="ed-content" id="standorte">
+        <div class="ed-loc-grid reveal">
+            <div class="ed-loc"><div class="ed-loc-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/poettmes.jpg" alt="Pöttmes" loading="lazy"></div><div class="ed-loc-body"><h3>Pöttmes</h3><div class="reg">bei Augsburg · Bayern</div><address>Immendorf 33, 86554 Pöttmes<br>Tel 08253-99 95-0</address></div></div>
+            <div class="ed-loc"><div class="ed-loc-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/marktoberdorf.jpg" alt="Marktoberdorf" loading="lazy"></div><div class="ed-loc-body"><h3>Marktoberdorf</h3><div class="reg">Allgäu · Bayern</div><address>Schwabenstraße 114, 87616 Marktoberdorf<br>Tel 08342-96 27-0</address></div></div>
+            <div class="ed-loc"><div class="ed-loc-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/halle.jpg" alt="Halle" loading="lazy"></div><div class="ed-loc-body"><h3>Halle</h3><div class="reg">an der Saale · Sachsen-Anhalt</div><address>Reideburger Str. 55, 06116 Halle/Saale<br>Tel 0345-569 93-0</address></div></div>
+            <div class="ed-loc"><div class="ed-loc-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/niederdorf.jpg" alt="Niederdorf" loading="lazy"></div><div class="ed-loc-body"><h3>Niederdorf</h3><div class="reg">Erzgebirge · Sachsen</div><address>Chemnitzer Str. 2b, 09366 Niederdorf<br>Tel 037296-701-0</address></div></div>
+        </div>
+    </div>
+
+    <div class="ed-divider"><span>Kontakt</span></div>
 
     <!-- ========== KONTAKT ========== -->
-    <section class="section section-contact" id="kontakt">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info animate-on-scroll">
-                    <span class="section-tag">Kontakt</span>
-                    <h2 class="section-title">Wir beraten <br><em>Sie gerne</em></h2>
-                    <p>
-                        Wir kümmern uns sehr gerne um Ihr Bauvorhaben und nehmen Ihre Wünsche ernst. 
-                        Fordern Sie unsere kostenlose Fachberatung an.
-                    </p>
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                            <div>
-                                <strong>Telefon (Hauptsitz)</strong>
-                                <a href="tel:+498253999500">08253 - 99 95-0</a>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                            <div>
-                                <strong>E-Mail</strong>
-                                <a href="mailto:info@hoermannshofer.de">info@hoermannshofer.de</a>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                            <div>
-                                <strong>Hauptsitz</strong>
-                                <span>Immendorf 33, 86554 Pöttmes</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper animate-on-scroll">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" id="name" name="name" required placeholder="Ihr Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-Mail *</label>
-                                <input type="email" id="email" name="email" required placeholder="Ihre E-Mail">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefon</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Ihre Telefonnummer">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Betreff</label>
-                            <select id="subject" name="subject">
-                                <option value="">Bitte wählen...</option>
-                                <option value="vhf">VHF – Vorgehängte hinterlüftete Fassaden</option>
-                                <option value="wdvs">WDVS – Wärmedämmverbundsysteme</option>
-                                <option value="sanierung">Fassadensanierung</option>
-                                <option value="beratung">Allgemeine Beratung</option>
-                                <option value="sonstiges">Sonstiges</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Nachricht *</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Beschreiben Sie Ihr Bauvorhaben..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            Nachricht senden
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
+    <div class="ed-content" id="kontakt">
+        <div class="ed-contact">
+            <div class="ed-contact-left reveal">
+                <h2>Wir beraten<br><em>Sie gerne</em></h2>
+                <p>Fordern Sie unsere kostenlose Fachberatung an. Wir kümmern uns um Ihr Bauvorhaben.</p>
+                <div class="ecd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><div><strong>Telefon</strong><a href="tel:+498253999500">08253 - 99 95-0</a></div></div>
+                <div class="ecd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div><strong>E-Mail</strong><a href="mailto:info@hoermannshofer.de">info@hoermannshofer.de</a></div></div>
+                <div class="ecd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><div><strong>Hauptsitz</strong><span>Immendorf 33, 86554 Pöttmes</span></div></div>
+            </div>
+            <div class="ed-form reveal">
+                <form>
+                    <div class="fr"><div class="fg"><label>Name *</label><input type="text" placeholder="Ihr Name" required></div><div class="fg"><label>E-Mail *</label><input type="email" placeholder="Ihre E-Mail" required></div></div>
+                    <div class="fg"><label>Telefon</label><input type="tel" placeholder="Ihre Telefonnummer"></div>
+                    <div class="fg"><label>Betreff</label><select><option>Bitte wählen...</option><option>VHF</option><option>WDVS</option><option>Beratung</option></select></div>
+                    <div class="fg"><label>Nachricht *</label><textarea rows="4" placeholder="Beschreiben Sie Ihr Bauvorhaben..." required></textarea></div>
+                    <button type="submit" class="btn-send">Nachricht senden →</button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <a href="#hero" class="footer-logo">
-                        <img src="https://www.hoermannshofer.de/images/hoermannshofer-logo.png" alt="HÖRMANNSHOFER FASSADEN®" class="footer-logo-img">
-                    </a>
-                    <p>Ihr Fassadenspezialist seit über 60 Jahren. Solides Handwerk trifft Tradition und Innovation.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4>Leistungen</h4>
-                        <ul>
-                            <li><a href="#leistungen">VHF Fassaden</a></li>
-                            <li><a href="#leistungen">WDVS Systeme</a></li>
-                            <li><a href="#leistungen">Putzfassaden</a></li>
-                            <li><a href="#leistungen">Betonsanierung</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Unternehmen</h4>
-                        <ul>
-                            <li><a href="#ueber-uns">Über uns</a></li>
-                            <li><a href="#standorte">Standorte</a></li>
-                            <li><a href="#kennzahlen">Kompetenz</a></li>
-                            <li><a href="#kontakt">Kontakt</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Rechtliches</h4>
-                        <ul>
-                            <li><a href="#">Impressum</a></li>
-                            <li><a href="#">Datenschutzerklärung</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 HÖRMANNSHOFER FASSADEN® – Alle Rechte vorbehalten.</p>
-            </div>
-        </div>
+    <footer class="ed-footer">
+        <p>&copy; 2026 HÖRMANNSHOFER FASSADEN® – Alle Rechte vorbehalten. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Theme Switcher
+        const tst=document.getElementById('themeSwitcherToggle'),tsp=document.getElementById('themeSwitcherPanel'),tpc=document.getElementById('themePanelClose');
+        const tos=document.querySelectorAll('.theme-option');
+        tst?.addEventListener('click',()=>tsp.classList.toggle('open'));
+        tpc?.addEventListener('click',()=>tsp.classList.remove('open'));
+        document.addEventListener('click',e=>{if(tsp?.classList.contains('open')&&!e.target.closest('.theme-switcher'))tsp.classList.remove('open');});
+        tos.forEach(b=>b.addEventListener('click',()=>{
+            document.body.classList.add('theme-transitioning');
+            document.body.setAttribute('data-theme',b.dataset.theme);
+            tos.forEach(x=>x.classList.remove('active'));b.classList.add('active');
+            localStorage.setItem('hoermannshofer-theme',b.dataset.theme);
+            setTimeout(()=>document.body.classList.remove('theme-transitioning'),700);
+        }));
+        const st=localStorage.getItem('hoermannshofer-theme');
+        if(st){document.body.setAttribute('data-theme',st);tos.forEach(b=>b.classList.toggle('active',b.dataset.theme===st));}
+
+        // Reveal
+        const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}}),{threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+        // Counters
+        const co=new IntersectionObserver(es=>es.forEach(e=>{
+            if(e.isIntersecting){const t=parseInt(e.target.dataset.target),d=t>1000?2500:2000,s=performance.now();
+            const a=n=>{const p=Math.min((n-s)/d,1);e.target.textContent=Math.floor(t*(1-Math.pow(1-p,4))).toLocaleString('de-DE');if(p<1)requestAnimationFrame(a);};
+            requestAnimationFrame(a);co.unobserve(e.target);}
+        }),{threshold:0.5});
+        document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
+    </script>
 </body>
 </html>
