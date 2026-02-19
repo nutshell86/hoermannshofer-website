@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HÖRMANNSHOFER FASSADEN® – Fullscreen Cinematic</title>
+    <link rel="stylesheet" href="themes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        /* ============ RESET & BASE ============ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; overflow-x: hidden; }
+        body {
+            font-family: var(--font-body, 'Inter', sans-serif);
+            color: var(--color-text, #333);
+            background: var(--color-bg, #F5F2ED);
+            line-height: 1.6;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ============ FULLSCREEN SECTIONS ============ */
+        .fs-section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* ============ TOP BAR (minimal) ============ */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            transition: background 0.4s;
+        }
+        .top-bar.scrolled {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            padding: 14px 40px;
+        }
+        .top-bar-logo img {
+            height: 36px;
+            filter: brightness(0) invert(1);
+        }
+        .top-bar-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+        .top-bar-cta:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        /* ============ DOT NAVIGATION ============ */
+        .dot-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .dot-nav a {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .dot-nav a:hover,
+        .dot-nav a.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            transform: scale(1.3);
+        }
+        .dot-nav a .dot-label {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 10px;
+            border-radius: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .dot-nav a:hover .dot-label { opacity: 1; }
+
+        /* ============ HERO SECTION ============ */
+        .fs-hero {
+            background: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/header.jpg') center/cover;
+        }
+        .fs-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%);
+        }
+        .hero-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            max-width: 900px;
+            padding: 0 40px;
+        }
+        .hero-badge-v2 {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.9);
+        }
+        .hero-badge-v2 img { height: 24px; }
+        .hero-center h1 {
+            font-family: var(--font-heading, 'Playfair Display', serif);
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.08;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        .hero-center h1 em {
+            font-style: italic;
+            color: var(--color-accent);
+        }
+        .hero-center p {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: bounceDown 2s ease infinite;
+        }
+        .hero-scroll-cue svg { width: 20px; height: 20px; }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============ ABOUT SECTION ============ */
+        .fs-about {
+            background: var(--color-bg-dark, #1a1a1a);
+            color: #fff;
+            padding: 0;
+        }
+        .split-screen {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .split-image {
+            background: url('https://www.hoermannshofer.de/images/hoermannshofer/neu/bild-1.jpg') center/cover;
+            position: relative;
+        }
+        .split-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 60%, var(--color-bg-dark, #1a1a1a));
+        }
+        .split-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px 80px 40px;
+        }
+        .split-content .tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+        .split-content h2 {
+            font-family: var(--font-heading, 'Playfair Display', serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 28px;
+        }
+        .split-content h2 em {
+            font-style: italic;
+            color: var(--color-accent);
+        }
+        .split-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            max-width: 500px;
+        }
+        .exp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+            padding: 16px 28px;
+            background: var(--color-accent);
+            border-radius: 12px;
+            color: #fff;
+            align-self: flex-start;
+        }
+        .exp-badge .num {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .exp-badge .txt {
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* ============ SERVICES SECTION ============ */
+        .fs-services {
+            background: var(--color-bg, #F5F2ED);
+            flex-direction: column;
+            padding: 100px 40px;
+        }
+        .section-head {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-head .tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+        }
+        .section-head h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-primary, #2B3A4A);
+            line-height: 1.2;
+        }
+        .section-head h2 em { color: var(--color-accent); font-style: italic; }
+        .services-duo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .svc-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 520px;
+            cursor: pointer;
+        }
+        .svc-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .svc-card:hover .svc-card-bg { transform: scale(1.08); }
+        .svc-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%);
+            z-index: 1;
+        }
+        .svc-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            z-index: 2;
+            color: #fff;
+        }
+        .svc-card-content .since {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 8px;
+        }
+        .svc-card-content h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .svc-card-content .fullname {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-bottom: 14px;
+        }
+        .svc-card-content p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            max-width: 400px;
+        }
+        .svc-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+        .svc-tags span {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* ============ STATS SECTION ============ */
+        .fs-stats {
+            background: var(--color-primary, #2B3A4A);
+            color: #fff;
+            flex-direction: column;
+            padding: 100px 40px;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            max-width: 1100px;
+            width: 100%;
+        }
+        .stat-block {
+            text-align: center;
+            padding: 50px 30px;
+            background: rgba(255,255,255,0.04);
+            transition: background 0.3s;
+        }
+        .stat-block:hover { background: rgba(255,255,255,0.08); }
+        .stat-block .number {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+        .stat-block .suffix {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            font-weight: 300;
+        }
+        .stat-block .label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        .stat-block .detail {
+            font-size: 0.75rem;
+            opacity: 0.5;
+            margin-top: 4px;
+        }
+
+        /* ============ REFERENZEN SECTION ============ */
+        .fs-referenzen {
+            background: var(--color-bg, #F5F2ED);
+            flex-direction: column;
+            padding: 100px 40px;
+        }
+        .ref-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0 40px;
+            max-width: 100vw;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .ref-scroll::-webkit-scrollbar { height: 4px; }
+        .ref-scroll::-webkit-scrollbar-track { background: transparent; }
+        .ref-scroll::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
+        .ref-card {
+            flex: 0 0 360px;
+            height: 440px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            scroll-snap-align: start;
+        }
+        .ref-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .ref-card:hover img { transform: scale(1.05); }
+        .ref-card .ref-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* ============ LOCATIONS SECTION ============ */
+        .fs-locations {
+            background: var(--color-bg-dark, #1a1a1a);
+            color: #fff;
+            flex-direction: column;
+            padding: 100px 40px;
+        }
+        .locations-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .loc-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s;
+        }
+        .loc-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+        }
+        .loc-card-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        .loc-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .loc-card:hover .loc-card-img img { transform: scale(1.05); }
+        .loc-card-body {
+            padding: 24px;
+        }
+        .loc-card-body h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        .loc-card-body .region {
+            font-size: 0.78rem;
+            color: var(--color-accent);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        .loc-card-body address {
+            font-style: normal;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            opacity: 0.6;
+        }
+
+        /* ============ CONTACT SECTION ============ */
+        .fs-contact {
+            background: var(--color-bg, #F5F2ED);
+            flex-direction: column;
+            padding: 100px 40px;
+        }
+        .contact-split {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            max-width: 1100px;
+            width: 100%;
+        }
+        .contact-left h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            color: var(--color-primary);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .contact-left h2 em { color: var(--color-accent); font-style: italic; }
+        .contact-left p {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .ci {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .ci svg {
+            width: 22px;
+            height: 22px;
+            color: var(--color-accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .ci strong {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--color-primary);
+            margin-bottom: 2px;
+        }
+        .ci a, .ci span {
+            font-size: 0.88rem;
+            color: var(--color-text-light);
+        }
+        .c-form {
+            background: var(--color-surface, #fff);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+        }
+        .c-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .c-form .fg {
+            margin-bottom: 16px;
+        }
+        .c-form label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 6px;
+        }
+        .c-form input,
+        .c-form select,
+        .c-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border, #ddd);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            background: var(--color-bg, #f9f9f9);
+            color: var(--color-text);
+            transition: border-color 0.3s;
+        }
+        .c-form input:focus,
+        .c-form select:focus,
+        .c-form textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+        .btn-send {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: var(--color-accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-send:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        /* ============ FOOTER ============ */
+        .fs-footer {
+            background: #0a0a0f;
+            color: rgba(255,255,255,0.5);
+            padding: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            scroll-snap-align: none;
+            min-height: auto;
+        }
+        .fs-footer a { color: var(--color-accent); }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .split-screen { grid-template-columns: 1fr; }
+            .split-image { height: 40vh; }
+            .split-image::after { background: linear-gradient(to bottom, transparent 60%, var(--color-bg-dark, #1a1a1a)); }
+            .services-duo { grid-template-columns: 1fr; }
+            .svc-card { height: 450px; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .locations-row { grid-template-columns: repeat(2, 1fr); }
+            .contact-split { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            html { scroll-snap-type: none; }
+            .dot-nav { display: none; }
+            .top-bar { padding: 14px 20px; }
+            .fs-section { padding-left: 20px; padding-right: 20px; }
+            .hero-center { padding: 0 20px; }
+            .split-content { padding: 40px 24px; }
+            .stats-row { grid-template-columns: 1fr; }
+            .locations-row { grid-template-columns: 1fr; }
+            .ref-card { flex: 0 0 280px; height: 350px; }
+        }
+    </style>
+</head>
+<body data-theme="classic">
+    <!-- ========== THEME SWITCHER ========== -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <button class="theme-switcher-toggle" id="themeSwitcherToggle" aria-label="Design wechseln">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <div class="theme-switcher-panel" id="themeSwitcherPanel">
+            <div class="theme-panel-header">
+                <span>Design & Layout</span>
+                <button class="theme-panel-close" id="themePanelClose">&times;</button>
+            </div>
+            <div class="theme-options">
+                <button class="theme-option active" data-theme="classic">
+                    <div class="theme-preview"><div class="theme-preview-bar" style="background:#2B3A4A"></div><div class="theme-preview-accent" style="background:#C67B3C"></div><div class="theme-preview-bg" style="background:#F5F2ED"></div></div>
+                    <span class="theme-name">Classic Warm</span><span class="theme-desc">Elegant & traditionell</span>
+                </button>
+                <button class="theme-option" data-theme="minimal">
+                    <div class="theme-preview"><div class="theme-preview-bar" style="background:#111"></div><div class="theme-preview-accent" style="background:#FF6B35"></div><div class="theme-preview-bg" style="background:#FAFAFA"></div></div>
+                    <span class="theme-name">Modern Minimal</span><span class="theme-desc">Puristisch & clean</span>
+                </button>
+                <button class="theme-option" data-theme="dark">
+                    <div class="theme-preview"><div class="theme-preview-bar" style="background:#0D0D0D"></div><div class="theme-preview-accent" style="background:#F0A500"></div><div class="theme-preview-bg" style="background:#1A1A2E"></div></div>
+                    <span class="theme-name">Industrial Dark</span><span class="theme-desc">Dunkel & kraftvoll</span>
+                </button>
+                <button class="theme-option" data-theme="nature">
+                    <div class="theme-preview"><div class="theme-preview-bar" style="background:#2D4A3E"></div><div class="theme-preview-accent" style="background:#8DB580"></div><div class="theme-preview-bg" style="background:#F0EDE5"></div></div>
+                    <span class="theme-name">Nature Eco</span><span class="theme-desc">Natürlich & nachhaltig</span>
+                </button>
+                <button class="theme-option" data-theme="blueprint">
+                    <div class="theme-preview"><div class="theme-preview-bar" style="background:#0A1628"></div><div class="theme-preview-accent" style="background:#00B4D8"></div><div class="theme-preview-bg" style="background:#F0F4F8"></div></div>
+                    <span class="theme-name">Blueprint</span><span class="theme-desc">Technisch & präzise</span>
+                </button>
+            </div>
+            <div class="variant-section-divider"><span>Layout</span></div>
+            <div class="variant-options">
+                <a href="index.html" class="variant-option"><div class="variant-option-num">1</div><div class="variant-option-info"><span class="variant-option-name">Classic Corporate</span><span class="variant-option-desc">Klassisches Top-Navbar Layout</span></div></a>
+                <a href="variante2.html" class="variant-option active"><div class="variant-option-num">2</div><div class="variant-option-info"><span class="variant-option-name">Fullscreen Cinematic</span><span class="variant-option-desc">Scroll-Snap Vollbild-Sektionen</span></div></a>
+                <a href="variante3.html" class="variant-option"><div class="variant-option-num">3</div><div class="variant-option-info"><span class="variant-option-name">Split Navigation</span><span class="variant-option-desc">Vertikale Sidebar-Navigation</span></div></a>
+                <a href="variante4.html" class="variant-option"><div class="variant-option-num">4</div><div class="variant-option-info"><span class="variant-option-name">Editorial Magazine</span><span class="variant-option-desc">Magazin-Stil mit Typografie</span></div></a>
+                <a href="variante5.html" class="variant-option"><div class="variant-option-num">5</div><div class="variant-option-info"><span class="variant-option-name">Bento Dashboard</span><span class="variant-option-desc">Kompaktes Karten-Layout</span></div></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TOP BAR ========== -->
+    <header class="top-bar" id="topBar">
+        <a href="#hero" class="top-bar-logo">
+            <img src="https://www.hoermannshofer.de/images/hoermannshofer-logo.png" alt="HÖRMANNSHOFER">
+        </a>
+        <a href="#kontakt" class="top-bar-cta">Kontakt aufnehmen</a>
+    </header>
+
+    <!-- ========== DOT NAVIGATION ========== -->
+    <nav class="dot-nav" id="dotNav">
+        <a href="#hero" class="active"><span class="dot-label">Start</span></a>
+        <a href="#ueber"><span class="dot-label">Über uns</span></a>
+        <a href="#leistungen"><span class="dot-label">Leistungen</span></a>
+        <a href="#zahlen"><span class="dot-label">Kompetenz</span></a>
+        <a href="#referenzen"><span class="dot-label">Referenzen</span></a>
+        <a href="#standorte"><span class="dot-label">Standorte</span></a>
+        <a href="#kontakt"><span class="dot-label">Kontakt</span></a>
+    </nav>
+
+    <!-- ========== 1. HERO ========== -->
+    <section class="fs-section fs-hero" id="hero">
+        <div class="hero-center">
+            <div class="hero-badge-v2 reveal">
+                <img src="https://www.hoermannshofer.de/images/Plus-x-award-2025.png" alt="Award">
+                <span>Plus X Award 2024 & 2025</span>
+            </div>
+            <h1 class="reveal">Solides Handwerk<br>trifft <em>Tradition</em></h1>
+            <p class="reveal">Ihr Fassadenspezialist seit über 60 Jahren – Wärmedämmung und individuelle Gestaltungsmöglichkeiten mit hochwertigen Fassadensystemen.</p>
+        </div>
+        <div class="hero-scroll-cue">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14l-7 7m0 0l-7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- ========== 2. ÜBER UNS ========== -->
+    <section class="fs-section fs-about" id="ueber">
+        <div class="split-screen">
+            <div class="split-image"></div>
+            <div class="split-content">
+                <span class="tag reveal">Über uns</span>
+                <h2 class="reveal">Familienunternehmen<br><em>mit Leidenschaft</em></h2>
+                <p class="reveal">Sie suchen einen zuverlässigen und kompetenten Partner für die Gestaltung und Sanierung Ihrer Fassade? Dann sprechen Sie mit uns.</p>
+                <p class="reveal">Wir sind ein mittelständisches Familienunternehmen und führen unser Handwerk seit über 60 Jahren gewissenhaft, termingerecht und in hoher Qualität aus.</p>
+                <p class="reveal">Seit 1964 steht unser Unternehmen für Kompetenz und solide Handwerksleistung. Als Pionier der ersten Stunde sind wir an der Einführung und Weiterentwicklung von innovativen Fassadensystemen engagiert beteiligt.</p>
+                <div class="exp-badge reveal">
+                    <span class="num">60+</span>
+                    <span class="txt">Jahre<br>Erfahrung</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 3. LEISTUNGEN ========== -->
+    <section class="fs-section fs-services" id="leistungen">
+        <div class="section-head reveal">
+            <span class="tag">Leistungen</span>
+            <h2>Wärmedämmung &<br><em>Gestaltungsmöglichkeiten</em></h2>
+        </div>
+        <div class="services-duo">
+            <div class="svc-card reveal">
+                <div class="svc-card-bg" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/vhf-1.jpg')"></div>
+                <div class="svc-card-content">
+                    <span class="since">seit 1964</span>
+                    <h3>VHF</h3>
+                    <p class="fullname">Vorgehängte hinterlüftete Fassaden</p>
+                    <p>Hohe Lebensdauer, geringer Wartungsaufwand und funktionale Sicherheit als wirtschaftliche und nachhaltige Lösung.</p>
+                    <div class="svc-tags">
+                        <span>Faserzement</span><span>Aluminium</span><span>Edelstahl</span><span>Naturstein</span><span>Keramik</span><span>Glas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="svc-card reveal">
+                <div class="svc-card-bg" style="background-image: url('https://www.hoermannshofer.de/images/hoermannshofer/wdvs-1.jpg')"></div>
+                <div class="svc-card-content">
+                    <span class="since">seit 1975</span>
+                    <h3>WDVS</h3>
+                    <p class="fullname">Wärmedämmverbundsysteme</p>
+                    <p>Bewährt bei energetischer Sanierung, Modernisierung und architektonischen Anforderungen an die Fassadengestaltung.</p>
+                    <div class="svc-tags">
+                        <span>Mineralfaser</span><span>EPS Polystyrol</span><span>Holzweichfaser</span><span>Hanf</span><span>Kork</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 4. KENNZAHLEN ========== -->
+    <section class="fs-section fs-stats" id="zahlen">
+        <div class="section-head reveal" style="color:#fff;margin-bottom:60px;">
+            <span class="tag">Kompetenz in Zahlen</span>
+            <h2 style="color:#fff;">Erfolg durch<br><em>Kompetenz</em></h2>
+        </div>
+        <div class="stats-row">
+            <div class="stat-block reveal">
+                <span class="number" data-target="60">0</span><span class="suffix">+</span>
+                <div class="label">Jahre Erfahrung</div>
+                <div class="detail">Seit 1964 Ihr Partner</div>
+            </div>
+            <div class="stat-block reveal">
+                <span class="number" data-target="400">0</span><span class="suffix">~</span>
+                <div class="label">Mitarbeiter</div>
+                <div class="detail">Qualifiziertes Fachpersonal</div>
+            </div>
+            <div class="stat-block reveal">
+                <span class="number" data-target="35000">0</span><span class="suffix">+</span>
+                <div class="label">Fassaden gebaut</div>
+                <div class="detail">Zur vollsten Zufriedenheit</div>
+            </div>
+            <div class="stat-block reveal">
+                <span class="number" data-target="4">0</span><span class="suffix"></span>
+                <div class="label">Standorte</div>
+                <div class="detail">Deutschlandweit im Einsatz</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 5. REFERENZEN ========== -->
+    <section class="fs-section fs-referenzen" id="referenzen">
+        <div class="section-head reveal">
+            <span class="tag">Referenzen</span>
+            <h2>Unsere Projekte<br><em>sprechen für sich</em></h2>
+        </div>
+        <div class="ref-scroll">
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-24.jpg" alt="VHF" loading="lazy"><div class="ref-label">VHF Fassade</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-31.jpg" alt="WDVS" loading="lazy"><div class="ref-label">WDVS System</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-20.jpg" alt="VHF" loading="lazy"><div class="ref-label">VHF Fassade</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-28.jpg" alt="WDVS" loading="lazy"><div class="ref-label">WDVS System</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-15.jpg" alt="VHF" loading="lazy"><div class="ref-label">VHF Fassade</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-22.jpg" alt="WDVS" loading="lazy"><div class="ref-label">WDVS System</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-10.jpg" alt="VHF" loading="lazy"><div class="ref-label">VHF Fassade</div></div>
+            <div class="ref-card"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-15.jpg" alt="WDVS" loading="lazy"><div class="ref-label">WDVS System</div></div>
+        </div>
+    </section>
+
+    <!-- ========== 6. STANDORTE ========== -->
+    <section class="fs-section fs-locations" id="standorte">
+        <div class="section-head reveal" style="color:#fff;margin-bottom:60px;">
+            <span class="tag">Standorte</span>
+            <h2 style="color:#fff;">4 Standorte in<br><em>ganz Deutschland</em></h2>
+        </div>
+        <div class="locations-row">
+            <div class="loc-card reveal">
+                <div class="loc-card-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/poettmes.jpg" alt="Pöttmes" loading="lazy"></div>
+                <div class="loc-card-body">
+                    <h3>Pöttmes</h3>
+                    <div class="region">bei Augsburg · Bayern</div>
+                    <address>Immendorf 33<br>86554 Pöttmes<br>Tel 08253-99 95-0</address>
+                </div>
+            </div>
+            <div class="loc-card reveal">
+                <div class="loc-card-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/marktoberdorf.jpg" alt="Marktoberdorf" loading="lazy"></div>
+                <div class="loc-card-body">
+                    <h3>Marktoberdorf</h3>
+                    <div class="region">Allgäu · Bayern</div>
+                    <address>Schwabenstraße 114<br>87616 Marktoberdorf<br>Tel 08342-96 27-0</address>
+                </div>
+            </div>
+            <div class="loc-card reveal">
+                <div class="loc-card-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/halle.jpg" alt="Halle" loading="lazy"></div>
+                <div class="loc-card-body">
+                    <h3>Halle</h3>
+                    <div class="region">an der Saale · Sachsen-Anhalt</div>
+                    <address>Reideburger Str. 55<br>06116 Halle/Saale<br>Tel 0345-569 93-0</address>
+                </div>
+            </div>
+            <div class="loc-card reveal">
+                <div class="loc-card-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/niederdorf.jpg" alt="Niederdorf" loading="lazy"></div>
+                <div class="loc-card-body">
+                    <h3>Niederdorf</h3>
+                    <div class="region">Erzgebirge · Sachsen</div>
+                    <address>Chemnitzer Str. 2b<br>09366 Niederdorf<br>Tel 037296-701-0</address>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 7. KONTAKT ========== -->
+    <section class="fs-section fs-contact" id="kontakt">
+        <div class="contact-split">
+            <div class="contact-left">
+                <h2 class="reveal">Wir beraten<br><em>Sie gerne</em></h2>
+                <p class="reveal">Fordern Sie unsere kostenlose Fachberatung an. Wir kümmern uns sehr gerne um Ihr Bauvorhaben.</p>
+                <div class="ci reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    <div><strong>Telefon</strong><a href="tel:+498253999500">08253 - 99 95-0</a></div>
+                </div>
+                <div class="ci reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <div><strong>E-Mail</strong><a href="mailto:info@hoermannshofer.de">info@hoermannshofer.de</a></div>
+                </div>
+                <div class="ci reveal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <div><strong>Hauptsitz</strong><span>Immendorf 33, 86554 Pöttmes</span></div>
+                </div>
+            </div>
+            <div class="c-form reveal">
+                <form>
+                    <div class="form-row">
+                        <div class="fg"><label>Name *</label><input type="text" placeholder="Ihr Name" required></div>
+                        <div class="fg"><label>E-Mail *</label><input type="email" placeholder="Ihre E-Mail" required></div>
+                    </div>
+                    <div class="fg"><label>Telefon</label><input type="tel" placeholder="Ihre Telefonnummer"></div>
+                    <div class="fg"><label>Betreff</label>
+                        <select><option value="">Bitte wählen...</option><option>VHF</option><option>WDVS</option><option>Sanierung</option><option>Beratung</option></select>
+                    </div>
+                    <div class="fg"><label>Nachricht *</label><textarea rows="4" placeholder="Beschreiben Sie Ihr Bauvorhaben..." required></textarea></div>
+                    <button type="submit" class="btn-send">Nachricht senden →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <div class="fs-footer">
+        <p>&copy; 2026 HÖRMANNSHOFER FASSADEN® – Alle Rechte vorbehalten. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+    </div>
+
+    <script>
+        // Theme Switcher
+        const themeSwitcherToggle = document.getElementById('themeSwitcherToggle');
+        const themeSwitcherPanel = document.getElementById('themeSwitcherPanel');
+        const themePanelClose = document.getElementById('themePanelClose');
+        const themeOptions = document.querySelectorAll('.theme-option');
+        themeSwitcherToggle?.addEventListener('click', () => themeSwitcherPanel.classList.toggle('open'));
+        themePanelClose?.addEventListener('click', () => themeSwitcherPanel.classList.remove('open'));
+        document.addEventListener('click', e => {
+            if (themeSwitcherPanel?.classList.contains('open') && !e.target.closest('.theme-switcher'))
+                themeSwitcherPanel.classList.remove('open');
+        });
+        themeOptions.forEach(btn => btn.addEventListener('click', () => {
+            const theme = btn.dataset.theme;
+            document.body.classList.add('theme-transitioning');
+            document.body.setAttribute('data-theme', theme);
+            themeOptions.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            localStorage.setItem('hoermannshofer-theme', theme);
+            setTimeout(() => document.body.classList.remove('theme-transitioning'), 700);
+        }));
+        const savedTheme = localStorage.getItem('hoermannshofer-theme');
+        if (savedTheme) {
+            document.body.setAttribute('data-theme', savedTheme);
+            themeOptions.forEach(btn => btn.classList.toggle('active', btn.dataset.theme === savedTheme));
+        }
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }});
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Top bar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('topBar')?.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+
+        // Dot nav active state
+        const sections = document.querySelectorAll('.fs-section');
+        const dots = document.querySelectorAll('.dot-nav a');
+        const secObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const id = e.target.id;
+                    dots.forEach(d => d.classList.toggle('active', d.getAttribute('href') === '#' + id));
+                }
+            });
+        }, { threshold: 0.5 });
+        sections.forEach(s => secObserver.observe(s));
+
+        // Counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const el = e.target;
+                    const target = parseInt(el.dataset.target);
+                    const duration = target > 1000 ? 2500 : 2000;
+                    const start = performance.now();
+                    const animate = (now) => {
+                        const p = Math.min((now - start) / duration, 1);
+                        const ease = 1 - Math.pow(1 - p, 4);
+                        el.textContent = Math.floor(target * ease).toLocaleString('de-DE');
+                        if (p < 1) requestAnimationFrame(animate);
+                    };
+                    requestAnimationFrame(animate);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+    </script>
+</body>
+</html>

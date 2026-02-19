@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HÖRMANNSHOFER FASSADEN® – Bento Dashboard</title>
+    <link rel="stylesheet" href="themes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body, 'DM Sans', 'Inter', sans-serif);
+            color: var(--color-text, #333);
+            background: var(--color-bg-warm, #F0EDE5);
+            line-height: 1.6;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ============ STICKY TOP BAR ============ */
+        .dash-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--color-surface, #fff);
+            border-bottom: 1px solid var(--color-border, #eee);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            height: 64px;
+        }
+        .dash-logo img { height: 30px; }
+        .dash-nav {
+            display: flex;
+            gap: 4px;
+            list-style: none;
+        }
+        .dash-nav a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-muted, #888);
+            transition: all 0.2s;
+        }
+        .dash-nav a:hover, .dash-nav a.active {
+            background: var(--color-bg, #f5f5f5);
+            color: var(--color-primary);
+        }
+        .dash-nav a svg { width: 16px; height: 16px; }
+        .dash-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .dash-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--color-bg, #f5f5f5);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .dash-search:hover { border-color: var(--color-border); }
+        .dash-search svg { width: 14px; height: 14px; }
+        .dash-cta {
+            padding: 8px 20px;
+            background: var(--color-accent);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .dash-cta:hover { filter: brightness(1.1); }
+
+        /* ============ MAIN CONTAINER ============ */
+        .dash-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* ============ BENTO HERO ============ */
+        .bento-hero {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            grid-template-rows: 280px 280px;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .bh-card {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: var(--color-surface, #fff);
+            border: 1px solid var(--color-border, #eee);
+            transition: all 0.3s;
+        }
+        .bh-card:hover { border-color: var(--color-accent); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+        .bh-main {
+            grid-row: 1 / 3;
+            border: none;
+        }
+        .bh-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .bh-main-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 36px;
+            color: #fff;
+        }
+        .bh-main-overlay .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            align-self: flex-start;
+        }
+        .bh-main-overlay .badge img { height: 18px; }
+        .bh-main-overlay h1 {
+            font-family: var(--font-heading, 'Playfair Display', serif);
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+        .bh-main-overlay h1 em { font-style: italic; color: var(--color-accent-light, #FFB87A); }
+        .bh-main-overlay p {
+            font-size: 0.88rem;
+            opacity: 0.8;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        /* Stat cards */
+        .bh-stat {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+        }
+        .bh-stat .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(198,123,60,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            color: var(--color-accent);
+        }
+        .bh-stat .icon svg { width: 22px; height: 22px; }
+        .bh-stat .val {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+        .bh-stat .suf { color: var(--color-accent); font-size: 1rem; }
+        .bh-stat .lbl {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            margin-top: 6px;
+        }
+
+        /* About card */
+        .bh-about {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bh-about .tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+        .bh-about h3 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        .bh-about p {
+            font-size: 0.82rem;
+            color: var(--color-text-light);
+            line-height: 1.7;
+        }
+
+        /* Image card */
+        .bh-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ============ SECTION HEADER ============ */
+        .sec-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-top: 16px;
+        }
+        .sec-head h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+        }
+        .sec-head h2 em { color: var(--color-accent); font-style: italic; }
+        .sec-head-line {
+            flex: 1;
+            height: 1px;
+            background: var(--color-border);
+            margin-left: 20px;
+        }
+
+        /* ============ TABS ============ */
+        .tab-bar {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+        .tab-btn.active {
+            background: var(--color-accent);
+            color: #fff;
+            border-color: var(--color-accent);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ============ SERVICE BENTO ============ */
+        .svc-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .svc-b-card {
+            background: var(--color-surface, #fff);
+            border: 1px solid var(--color-border, #eee);
+            border-radius: 16px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            transition: border-color 0.3s;
+        }
+        .svc-b-card:hover { border-color: var(--color-accent); }
+        .svc-b-img {
+            overflow: hidden;
+        }
+        .svc-b-img img { width: 100%; height: 100%; object-fit: cover; min-height: 260px; }
+        .svc-b-body {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+        .svc-b-body .since {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .svc-b-body h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-bottom: 2px;
+        }
+        .svc-b-body .fullname {
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            margin-bottom: 12px;
+        }
+        .svc-b-body p {
+            font-size: 0.84rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin-bottom: 14px;
+            flex: 1;
+        }
+        .svc-b-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .svc-b-tags span {
+            padding: 3px 10px;
+            background: var(--color-bg, #f5f5f5);
+            border-radius: 6px;
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+        }
+
+        /* ============ REFERENCE BENTO ============ */
+        .ref-bento {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 200px 200px;
+            gap: 12px;
+        }
+        .rb-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .rb-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .rb-item:hover img { transform: scale(1.05); }
+        .rb-label {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
+        /* ============ LOCATION COMPACT ============ */
+        .loc-compact {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .lc-card {
+            background: var(--color-surface, #fff);
+            border: 1px solid var(--color-border, #eee);
+            border-radius: 12px;
+            padding: 20px;
+            transition: border-color 0.3s;
+            display: flex;
+            gap: 14px;
+        }
+        .lc-card:hover { border-color: var(--color-accent); }
+        .lc-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .lc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .lc-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--color-primary);
+            margin-bottom: 2px;
+        }
+        .lc-info .reg {
+            font-size: 0.7rem;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .lc-info address {
+            font-style: normal;
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ============ CONTACT BENTO ============ */
+        .contact-bento {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 16px;
+        }
+        .cb-info {
+            background: var(--color-primary);
+            border-radius: 16px;
+            padding: 36px;
+            color: #fff;
+        }
+        .cb-info h2 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .cb-info h2 em { color: var(--color-accent); font-style: italic; }
+        .cb-info > p {
+            font-size: 0.88rem;
+            opacity: 0.7;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+        .cb-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .cb-detail svg { width: 18px; height: 18px; color: var(--color-accent); flex-shrink: 0; }
+        .cb-detail strong { display: block; font-size: 0.72rem; opacity: 0.6; }
+        .cb-detail a, .cb-detail span { font-size: 0.85rem; color: #fff; }
+        .cb-form {
+            background: var(--color-surface, #fff);
+            border: 1px solid var(--color-border, #eee);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .cb-form .fr { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .cb-form .fg { margin-bottom: 12px; }
+        .cb-form label { display: block; font-size: 0.72rem; font-weight: 600; color: var(--color-primary); margin-bottom: 5px; }
+        .cb-form input, .cb-form select, .cb-form textarea {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--color-border);
+            border-radius: 8px; font-family: inherit; font-size: 0.85rem;
+            background: var(--color-bg); color: var(--color-text); transition: border-color 0.3s;
+        }
+        .cb-form input:focus, .cb-form select:focus, .cb-form textarea:focus { outline: none; border-color: var(--color-accent); }
+        .cb-form .btn-send {
+            width: 100%; padding: 12px; background: var(--color-accent); color: #fff;
+            border: none; border-radius: 8px; font-family: inherit; font-size: 0.85rem;
+            font-weight: 600; cursor: pointer; transition: all 0.3s;
+        }
+        .cb-form .btn-send:hover { filter: brightness(1.1); }
+
+        /* ============ FOOTER ============ */
+        .dash-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-top: 20px;
+        }
+        .dash-footer a { color: var(--color-accent); }
+
+        /* ============ REVEAL ============ */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1100px) {
+            .bento-hero { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+            .bh-main { grid-row: auto; grid-column: 1 / -1; height: 350px; }
+            .svc-bento { grid-template-columns: 1fr; }
+            .ref-bento { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .rb-item { height: 200px; }
+            .loc-compact { grid-template-columns: repeat(2, 1fr); }
+            .contact-bento { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .dash-bar { padding: 0 16px; }
+            .dash-nav { display: none; }
+            .dash-search { display: none; }
+            .dash-main { padding: 16px; }
+            .bento-hero { grid-template-columns: 1fr; }
+            .bh-main { height: 300px; }
+            .svc-b-card { grid-template-columns: 1fr; }
+            .svc-b-img img { min-height: 180px; }
+            .ref-bento { grid-template-columns: 1fr; }
+            .rb-item { height: 180px; }
+            .loc-compact { grid-template-columns: 1fr; }
+            .lc-card { flex-direction: column; }
+            .bh-main-overlay h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body data-theme="classic">
+    <!-- THEME SWITCHER -->
+    <div class="theme-switcher" id="themeSwitcher">
+        <button class="theme-switcher-toggle" id="themeSwitcherToggle" aria-label="Design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+        <div class="theme-switcher-panel" id="themeSwitcherPanel">
+            <div class="theme-panel-header"><span>Design & Layout</span><button class="theme-panel-close" id="themePanelClose">&times;</button></div>
+            <div class="theme-options">
+                <button class="theme-option active" data-theme="classic"><div class="theme-preview"><div class="theme-preview-bar" style="background:#2B3A4A"></div><div class="theme-preview-accent" style="background:#C67B3C"></div><div class="theme-preview-bg" style="background:#F5F2ED"></div></div><span class="theme-name">Classic Warm</span><span class="theme-desc">Elegant</span></button>
+                <button class="theme-option" data-theme="minimal"><div class="theme-preview"><div class="theme-preview-bar" style="background:#111"></div><div class="theme-preview-accent" style="background:#FF6B35"></div><div class="theme-preview-bg" style="background:#FAFAFA"></div></div><span class="theme-name">Modern Minimal</span><span class="theme-desc">Puristisch</span></button>
+                <button class="theme-option" data-theme="dark"><div class="theme-preview"><div class="theme-preview-bar" style="background:#0D0D0D"></div><div class="theme-preview-accent" style="background:#F0A500"></div><div class="theme-preview-bg" style="background:#1A1A2E"></div></div><span class="theme-name">Industrial Dark</span><span class="theme-desc">Dunkel</span></button>
+                <button class="theme-option" data-theme="nature"><div class="theme-preview"><div class="theme-preview-bar" style="background:#2D4A3E"></div><div class="theme-preview-accent" style="background:#8DB580"></div><div class="theme-preview-bg" style="background:#F0EDE5"></div></div><span class="theme-name">Nature Eco</span><span class="theme-desc">Natürlich</span></button>
+                <button class="theme-option" data-theme="blueprint"><div class="theme-preview"><div class="theme-preview-bar" style="background:#0A1628"></div><div class="theme-preview-accent" style="background:#00B4D8"></div><div class="theme-preview-bg" style="background:#F0F4F8"></div></div><span class="theme-name">Blueprint</span><span class="theme-desc">Technisch</span></button>
+            </div>
+            <div class="variant-section-divider"><span>Layout</span></div>
+            <div class="variant-options">
+                <a href="index.html" class="variant-option"><div class="variant-option-num">1</div><div class="variant-option-info"><span class="variant-option-name">Classic Corporate</span><span class="variant-option-desc">Klassisches Top-Navbar Layout</span></div></a>
+                <a href="variante2.html" class="variant-option"><div class="variant-option-num">2</div><div class="variant-option-info"><span class="variant-option-name">Fullscreen Cinematic</span><span class="variant-option-desc">Scroll-Snap Vollbild-Sektionen</span></div></a>
+                <a href="variante3.html" class="variant-option"><div class="variant-option-num">3</div><div class="variant-option-info"><span class="variant-option-name">Split Navigation</span><span class="variant-option-desc">Vertikale Sidebar-Navigation</span></div></a>
+                <a href="variante4.html" class="variant-option"><div class="variant-option-num">4</div><div class="variant-option-info"><span class="variant-option-name">Editorial Magazine</span><span class="variant-option-desc">Magazin-Stil mit Typografie</span></div></a>
+                <a href="variante5.html" class="variant-option active"><div class="variant-option-num">5</div><div class="variant-option-info"><span class="variant-option-name">Bento Dashboard</span><span class="variant-option-desc">Kompaktes Karten-Layout</span></div></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== DASHBOARD TOP BAR ========== -->
+    <header class="dash-bar">
+        <a href="#" class="dash-logo"><img src="https://www.hoermannshofer.de/images/hoermannshofer-logo.png" alt="HÖRMANNSHOFER"></a>
+        <ul class="dash-nav">
+            <li><a href="#hero" class="active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Übersicht
+            </a></li>
+            <li><a href="#leistungen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                Leistungen
+            </a></li>
+            <li><a href="#referenzen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                Referenzen
+            </a></li>
+            <li><a href="#standorte">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                Standorte
+            </a></li>
+        </ul>
+        <div class="dash-right">
+            <div class="dash-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                Suche...
+            </div>
+            <a href="#kontakt" class="dash-cta">Kontakt</a>
+        </div>
+    </header>
+
+    <div class="dash-main">
+
+        <!-- ========== BENTO HERO ========== -->
+        <div class="bento-hero reveal" id="hero">
+            <!-- Main hero card -->
+            <div class="bh-card bh-main">
+                <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/header.jpg" alt="Fassade" class="bh-main-img">
+                <div class="bh-main-overlay">
+                    <div class="badge"><img src="https://www.hoermannshofer.de/images/Plus-x-award-2025.png" alt="Award">Plus X Award 2024 & 2025</div>
+                    <h1>Solides Handwerk<br>trifft <em>Tradition</em></h1>
+                    <p>Ihr Fassadenspezialist seit über 60 Jahren – Wärmedämmung und individuelle Gestaltungsmöglichkeiten.</p>
+                </div>
+            </div>
+            <!-- Stat cards -->
+            <div class="bh-card bh-stat">
+                <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                <div class="val"><span data-target="60">0</span><span class="suf">+</span></div>
+                <div class="lbl">Jahre Erfahrung</div>
+            </div>
+            <div class="bh-card bh-stat">
+                <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+                <div class="val"><span data-target="400">0</span><span class="suf">~</span></div>
+                <div class="lbl">Mitarbeiter</div>
+            </div>
+            <!-- About card -->
+            <div class="bh-card bh-about">
+                <span class="tag">Über uns</span>
+                <h3>Familienunternehmen mit Leidenschaft</h3>
+                <p>Seit 1964 steht unser Unternehmen für Kompetenz und solide Handwerksleistung. ~400 Mitarbeiter, 4 Standorte, über 35.000 Fassaden gebaut.</p>
+            </div>
+            <!-- Image card -->
+            <div class="bh-card bh-img">
+                <img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/bild-1.jpg" alt="Arbeit" loading="lazy">
+            </div>
+        </div>
+
+        <!-- ========== LEISTUNGEN (Tabs) ========== -->
+        <div id="leistungen">
+            <div class="sec-head reveal">
+                <h2>Leistungen & <em>Systeme</em></h2>
+                <div class="sec-head-line"></div>
+            </div>
+
+            <div class="tab-bar reveal">
+                <button class="tab-btn active" data-tab="alle">Alle</button>
+                <button class="tab-btn" data-tab="vhf">VHF</button>
+                <button class="tab-btn" data-tab="wdvs">WDVS</button>
+            </div>
+
+            <div class="tab-content active" data-tab="alle">
+                <div class="svc-bento reveal">
+                    <div class="svc-b-card">
+                        <div class="svc-b-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/vhf-1.jpg" alt="VHF" loading="lazy"></div>
+                        <div class="svc-b-body">
+                            <span class="since">seit 1964</span>
+                            <h3>VHF</h3>
+                            <div class="fullname">Vorgehängte hinterlüftete Fassaden</div>
+                            <p>Hohe Lebensdauer, geringer Wartungsaufwand und funktionale Sicherheit als wirtschaftliche und nachhaltige Lösung.</p>
+                            <div class="svc-b-tags"><span>Faserzement</span><span>Aluminium</span><span>Edelstahl</span><span>Naturstein</span><span>Keramik</span><span>Glas</span></div>
+                        </div>
+                    </div>
+                    <div class="svc-b-card">
+                        <div class="svc-b-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/wdvs-1.jpg" alt="WDVS" loading="lazy"></div>
+                        <div class="svc-b-body">
+                            <span class="since">seit 1975</span>
+                            <h3>WDVS</h3>
+                            <div class="fullname">Wärmedämmverbundsysteme</div>
+                            <p>Bewährt bei energetischer Sanierung, Modernisierung und architektonischen Anforderungen an die Fassadengestaltung.</p>
+                            <div class="svc-b-tags"><span>Mineralfaser</span><span>EPS Polystyrol</span><span>Holzweichfaser</span><span>Hanf</span><span>Kork</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="vhf">
+                <div class="svc-bento reveal">
+                    <div class="svc-b-card" style="grid-column: 1 / -1;">
+                        <div class="svc-b-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/vhf-1.jpg" alt="VHF" loading="lazy"></div>
+                        <div class="svc-b-body">
+                            <span class="since">seit 1964</span>
+                            <h3>VHF</h3>
+                            <div class="fullname">Vorgehängte hinterlüftete Fassaden</div>
+                            <p>Vorgehängte hinterlüftete Fassadensysteme haben eine hohe Lebensdauer und erweisen sich aufgrund des geringen Wartungsaufwands und ihrer funktionalen Sicherheit als eine wirtschaftliche und nachhaltige Lösung.</p>
+                            <div class="svc-b-tags"><span>Faserzement</span><span>Aluminium</span><span>Edelstahl</span><span>Naturstein</span><span>Keramik</span><span>Glas</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="wdvs">
+                <div class="svc-bento reveal">
+                    <div class="svc-b-card" style="grid-column: 1 / -1;">
+                        <div class="svc-b-img"><img src="https://www.hoermannshofer.de/images/hoermannshofer/wdvs-1.jpg" alt="WDVS" loading="lazy"></div>
+                        <div class="svc-b-body">
+                            <span class="since">seit 1975</span>
+                            <h3>WDVS</h3>
+                            <div class="fullname">Wärmedämmverbundsysteme</div>
+                            <p>Wärmedämmverbundsysteme haben sich sowohl bei der energetischen Sanierung, bei der Modernisierung als auch bei besonderen architektonischen Anforderungen an die Gestaltung von Fassaden bestens bewährt.</p>
+                            <div class="svc-b-tags"><span>Mineralfaser</span><span>EPS Polystyrol</span><span>Holzweichfaser</span><span>Hanf</span><span>Kork</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== REFERENZEN ========== -->
+        <div id="referenzen" style="margin-top:24px;">
+            <div class="sec-head reveal">
+                <h2>Referenzen & <em>Projekte</em></h2>
+                <div class="sec-head-line"></div>
+            </div>
+            <div class="ref-bento reveal">
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-24.jpg" alt="VHF" loading="lazy"><div class="rb-label">VHF Fassade</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-31.jpg" alt="WDVS" loading="lazy"><div class="rb-label">WDVS</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-20.jpg" alt="VHF" loading="lazy"><div class="rb-label">VHF</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-28.jpg" alt="WDVS" loading="lazy"><div class="rb-label">WDVS</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-15.jpg" alt="VHF" loading="lazy"><div class="rb-label">VHF Fassade</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-22.jpg" alt="WDVS" loading="lazy"><div class="rb-label">WDVS</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/vhf-referenzen/vhf-10.jpg" alt="VHF" loading="lazy"><div class="rb-label">VHF Fassade</div></div>
+                <div class="rb-item"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/wdvs-referenzen/wdvs-15.jpg" alt="WDVS" loading="lazy"><div class="rb-label">WDVS System</div></div>
+            </div>
+        </div>
+
+        <!-- ========== STANDORTE ========== -->
+        <div id="standorte" style="margin-top:24px;">
+            <div class="sec-head reveal">
+                <h2>Standorte</h2>
+                <div class="sec-head-line"></div>
+            </div>
+            <div class="loc-compact reveal">
+                <div class="lc-card"><div class="lc-thumb"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/poettmes.jpg" alt="Pöttmes" loading="lazy"></div><div class="lc-info"><h3>Pöttmes</h3><div class="reg">bei Augsburg · Bayern</div><address>Immendorf 33<br>86554 Pöttmes<br>Tel 08253-99 95-0</address></div></div>
+                <div class="lc-card"><div class="lc-thumb"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/marktoberdorf.jpg" alt="Marktoberdorf" loading="lazy"></div><div class="lc-info"><h3>Marktoberdorf</h3><div class="reg">Allgäu · Bayern</div><address>Schwabenstraße 114<br>87616 Marktoberdorf<br>Tel 08342-96 27-0</address></div></div>
+                <div class="lc-card"><div class="lc-thumb"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/halle.jpg" alt="Halle" loading="lazy"></div><div class="lc-info"><h3>Halle</h3><div class="reg">an der Saale · Sachsen-Anhalt</div><address>Reideburger Str. 55<br>06116 Halle/Saale<br>Tel 0345-569 93-0</address></div></div>
+                <div class="lc-card"><div class="lc-thumb"><img src="https://www.hoermannshofer.de/images/hoermannshofer/neu/Header-unternehmen/niederdorf.jpg" alt="Niederdorf" loading="lazy"></div><div class="lc-info"><h3>Niederdorf</h3><div class="reg">Erzgebirge · Sachsen</div><address>Chemnitzer Str. 2b<br>09366 Niederdorf<br>Tel 037296-701-0</address></div></div>
+            </div>
+        </div>
+
+        <!-- ========== KONTAKT ========== -->
+        <div id="kontakt" style="margin-top:24px;">
+            <div class="sec-head reveal">
+                <h2>Kontakt & <em>Beratung</em></h2>
+                <div class="sec-head-line"></div>
+            </div>
+            <div class="contact-bento reveal">
+                <div class="cb-info">
+                    <h2>Wir beraten<br><em>Sie gerne</em></h2>
+                    <p>Fordern Sie unsere kostenlose Fachberatung an. Von der Bestandsaufnahme bis zur Gestaltungsplanung.</p>
+                    <div class="cb-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><div><strong>Telefon</strong><a href="tel:+498253999500">08253 - 99 95-0</a></div></div>
+                    <div class="cb-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div><strong>E-Mail</strong><a href="mailto:info@hoermannshofer.de">info@hoermannshofer.de</a></div></div>
+                    <div class="cb-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><div><strong>Hauptsitz</strong><span>Immendorf 33, 86554 Pöttmes</span></div></div>
+                </div>
+                <div class="cb-form">
+                    <form>
+                        <div class="fr"><div class="fg"><label>Name *</label><input type="text" placeholder="Ihr Name" required></div><div class="fg"><label>E-Mail *</label><input type="email" placeholder="Ihre E-Mail" required></div></div>
+                        <div class="fg"><label>Telefon</label><input type="tel" placeholder="Ihre Telefonnummer"></div>
+                        <div class="fg"><label>Betreff</label><select><option>Bitte wählen...</option><option>VHF</option><option>WDVS</option><option>Beratung</option></select></div>
+                        <div class="fg"><label>Nachricht *</label><textarea rows="4" placeholder="Beschreiben Sie Ihr Bauvorhaben..." required></textarea></div>
+                        <button type="submit" class="btn-send">Nachricht senden →</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /dash-main -->
+
+    <footer class="dash-footer">
+        <p>&copy; 2026 HÖRMANNSHOFER FASSADEN® | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+    </footer>
+
+    <script>
+        // Theme Switcher
+        const tst=document.getElementById('themeSwitcherToggle'),tsp=document.getElementById('themeSwitcherPanel'),tpc=document.getElementById('themePanelClose');
+        const tos=document.querySelectorAll('.theme-option');
+        tst?.addEventListener('click',()=>tsp.classList.toggle('open'));
+        tpc?.addEventListener('click',()=>tsp.classList.remove('open'));
+        document.addEventListener('click',e=>{if(tsp?.classList.contains('open')&&!e.target.closest('.theme-switcher'))tsp.classList.remove('open');});
+        tos.forEach(b=>b.addEventListener('click',()=>{
+            document.body.classList.add('theme-transitioning');
+            document.body.setAttribute('data-theme',b.dataset.theme);
+            tos.forEach(x=>x.classList.remove('active'));b.classList.add('active');
+            localStorage.setItem('hoermannshofer-theme',b.dataset.theme);
+            setTimeout(()=>document.body.classList.remove('theme-transitioning'),700);
+        }));
+        const st=localStorage.getItem('hoermannshofer-theme');
+        if(st){document.body.setAttribute('data-theme',st);tos.forEach(b=>b.classList.toggle('active',b.dataset.theme===st));}
+
+        // Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.dataset.tab === tab));
+            });
+        });
+
+        // Reveal
+        const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}}),{threshold:0.08});
+        document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+        // Counters
+        const co=new IntersectionObserver(es=>es.forEach(e=>{
+            if(e.isIntersecting){const t=parseInt(e.target.dataset.target),d=t>1000?2500:2000,s=performance.now();
+            const a=n=>{const p=Math.min((n-s)/d,1);e.target.textContent=Math.floor(t*(1-Math.pow(1-p,4))).toLocaleString('de-DE');if(p<1)requestAnimationFrame(a);};
+            requestAnimationFrame(a);co.unobserve(e.target);}
+        }),{threshold:0.5});
+        document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
+
+        // Active nav link
+        const navLinks = document.querySelectorAll('.dash-nav a');
+        const secObs = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) {
+                navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+            }
+        }), { threshold: 0.3 });
+        document.querySelectorAll('[id]').forEach(s => { if (s.closest('.dash-main')) secObs.observe(s); });
+    </script>
+</body>
+</html>
